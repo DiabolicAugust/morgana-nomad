@@ -7,7 +7,7 @@ export function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-border mt-20 bg-muted/30">
-      <div className="mx-auto max-w-6xl px-4 py-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+      <div className="mx-auto max-w-6xl px-4 py-12 grid gap-10 sm:grid-cols-2 text-sm">
         <div>
           <p className="font-semibold text-foreground">{siteConfig.name}</p>
           <p className="mt-2 text-muted-foreground max-w-xs">{siteConfig.description}</p>
@@ -28,16 +28,6 @@ export function Footer() {
               </Link>
             </li>
           </ul>
-        </div>
-        <div>
-          <p className="font-semibold text-foreground mb-3">Publish</p>
-          <p className="text-muted-foreground">
-            Manage articles in{" "}
-            <Link href="/studio" className="text-accent hover:underline">
-              Sanity Studio
-            </Link>
-            .
-          </p>
         </div>
       </div>
       <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">

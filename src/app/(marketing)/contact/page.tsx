@@ -11,11 +11,12 @@ export default function ContactPage() {
     <article className="max-w-3xl">
       <h1 className="text-3xl font-bold tracking-tight">Contact</h1>
       <p className="mt-6 text-muted-foreground">
-        For corrections, media enquiries, or partnerships, email the address you configure in production. This page is
-        a static placeholder so navigation and metadata stay complete out of the box.
+        Corrections to published guides, media enquiries, and partnership ideas are welcome. Include the relevant
+        article URL and supporting sources wherever possible—we review factual updates and revise content when verified.
       </p>
       <p className="mt-4 text-muted-foreground">
-        Replace this section with a form provider (Tally, Basin, Formspark) or your support inbox.
+        We do not provide individual immigration or tax advice by email; those situations need a licensed professional who
+        can review your full circumstances.
       </p>
     </article>
   );

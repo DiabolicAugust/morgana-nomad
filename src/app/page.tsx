@@ -9,6 +9,9 @@ import { getClient } from "@/sanity/lib/client";
 import { allCategoriesQuery, featuredArticlesQuery } from "@/sanity/lib/queries";
 import type { ArticleCard, CategoryRef } from "@/types/sanity";
 
+/** Refresh from Sanity periodically in production so content isn’t stuck on an empty deploy-time snapshot. */
+export const revalidate = 120;
+
 async function loadHome() {
   try {
     const client = getClient();
@@ -18,9 +21,7 @@ async function loadHome() {
     ]);
     return { articles: articles ?? [], categories: categories ?? [] };
   } catch (err) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("[sanity] Home page fetch failed:", err);
-    }
+    console.error("[sanity] Home page fetch failed:", err);
     return { articles: [] as ArticleCard[], categories: [] as CategoryRef[] };
   }
 }

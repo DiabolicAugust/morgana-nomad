@@ -18,9 +18,6 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link href="/studio" className="hover:text-foreground transition-colors">
-            Studio
-          </Link>
         </nav>
         <MobileMenu />
       </div>

@@ -5,11 +5,9 @@ import { sanityEnv } from "../env";
 export function getClient(): SanityClient {
   const { projectId, dataset, apiVersion } = sanityEnv();
   if (!projectId) {
-    if (process.env.NODE_ENV === "development") {
-      console.error(
-        "[sanity] NEXT_PUBLIC_SANITY_PROJECT_ID is missing. Add it to .env.local in the project root (next to package.json), restart `npm run dev`, and confirm the file is not named .env only (Next only autoloads certain env files).",
-      );
-    }
+    console.error(
+      "[sanity] NEXT_PUBLIC_SANITY_PROJECT_ID is missing. Set it on your hosting provider (Production + Preview) for builds and runtime, then redeploy. Local: add to .env.local at project root.",
+    );
   }
   return createClient({
     projectId: projectId || "placeholder",

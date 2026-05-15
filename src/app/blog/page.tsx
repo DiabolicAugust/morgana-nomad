@@ -8,6 +8,9 @@ import type { ArticleCard as ArticleCardType } from "@/types/sanity";
 
 const PAGE_SIZE = 9;
 
+/** See `src/app/page.tsx` — same revalidation cadence as other Sanity-backed routes. */
+export const revalidate = 120;
+
 export const metadata = createMetadata({
   title: "Blog",
   description: "Articles on visas, cities, budgets, and remote work in Poland for digital nomads.",
@@ -33,9 +36,7 @@ export default async function BlogIndexPage({
       client.fetch<number>(articlesCountQuery),
     ]);
   } catch (err) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("[sanity] Blog index fetch failed:", err);
-    }
+    console.error("[sanity] Blog index fetch failed:", err);
     articles = [];
     total = 0;
   }

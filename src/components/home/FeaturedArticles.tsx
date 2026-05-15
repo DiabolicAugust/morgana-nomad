@@ -13,13 +13,7 @@ export function FeaturedArticles({ articles }: { articles: ArticleCardType[] }) 
           </h2>
         </div>
         <p className="text-muted-foreground rounded-xl border border-dashed border-border p-8 text-center">
-          No articles yet. Add your Sanity project ID to{" "}
-          <code className="rounded bg-muted px-1">.env.local</code>, run{" "}
-          <code className="rounded bg-muted px-1">npm run seed</code>, or publish from{" "}
-          <Link href="/studio" className="text-accent hover:underline">
-            /studio
-          </Link>
-          .
+          We&apos;re preparing new guides. Check back soon.
         </p>
       </section>
     );

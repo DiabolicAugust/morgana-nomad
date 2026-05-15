@@ -34,9 +34,6 @@ export function MobileMenu() {
               {item.label}
             </Link>
           ))}
-          <Link href="/studio" className="py-1 text-muted-foreground" onClick={() => setOpen(false)}>
-            Studio
-          </Link>
         </nav>
       ) : null}
     </div>
