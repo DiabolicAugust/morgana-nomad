@@ -17,9 +17,10 @@ export const metadata = createMetadata({
 export default async function BlogIndexPage({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }) {
-  const page = Math.max(1, parseInt(searchParams.page ?? "1", 10) || 1);
+  const { page: pageParam } = await searchParams;
+  const page = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
   const start = (page - 1) * PAGE_SIZE;
   const end = start + PAGE_SIZE;
 

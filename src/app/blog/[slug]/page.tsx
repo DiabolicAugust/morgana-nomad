@@ -14,7 +14,7 @@ import type { ArticleFull } from "@/types/sanity";
 
 export const revalidate = 120;
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
   try {
@@ -30,14 +30,15 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
   try {
     const client = getClient();
-    const article = await client.fetch<ArticleFull | null>(articleBySlugQuery, { slug: params.slug });
+    const article = await client.fetch<ArticleFull | null>(articleBySlugQuery, { slug });
     if (!article) {
       return createMetadata({
         title: "Article",
         description: siteConfig.description,
-        path: `/blog/${params.slug}`,
+        path: `/blog/${slug}`,
         noIndex: true,
       });
     }
@@ -57,17 +58,18 @@ export async function generateMetadata({ params }: Props) {
     return createMetadata({
       title: "Blog",
       description: siteConfig.description,
-      path: `/blog/${params.slug}`,
+      path: `/blog/${slug}`,
       noIndex: true,
     });
   }
 }
 
 export default async function ArticlePage({ params }: Props) {
+  const { slug } = await params;
   let article: ArticleFull | null = null;
   try {
     const client = getClient();
-    article = await client.fetch<ArticleFull | null>(articleBySlugQuery, { slug: params.slug });
+    article = await client.fetch<ArticleFull | null>(articleBySlugQuery, { slug });
   } catch (err) {
     if (process.env.NODE_ENV === "development") {
       console.error("[sanity] Article page fetch failed:", err);

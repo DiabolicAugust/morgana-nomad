@@ -19,7 +19,10 @@ export const revalidate = 120;
 
 const PAGE_SIZE = 9;
 
-type Props = { params: { category: string }; searchParams: { page?: string } };
+type Props = {
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ page?: string }>;
+};
 
 export async function generateStaticParams() {
   try {
@@ -31,15 +34,16 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata({ params }: { params: { category: string } }) {
+export async function generateMetadata({ params }: Pick<Props, "params">) {
+  const { category: categorySlug } = await params;
   try {
     const client = getClient();
-    const cat = await client.fetch<CategoryRef | null>(categoryBySlugQuery, { slug: params.category });
+    const cat = await client.fetch<CategoryRef | null>(categoryBySlugQuery, { slug: categorySlug });
     if (!cat) {
       return createMetadata({
         title: "Category",
         description: "Browse articles by category.",
-        path: `/blog/category/${params.category}`,
+        path: `/blog/category/${categorySlug}`,
         noIndex: true,
       });
     }
@@ -52,23 +56,25 @@ export async function generateMetadata({ params }: { params: { category: string 
     return createMetadata({
       title: "Category",
       description: "Browse articles.",
-      path: `/blog/category/${params.category}`,
+      path: `/blog/category/${categorySlug}`,
       noIndex: true,
     });
   }
 }
 
 export default async function CategoryPage({ params, searchParams }: Props) {
+  const { category: categorySlug } = await params;
+  const { page: pageParam } = await searchParams;
   const client = getClient();
   let category: CategoryRef | null = null;
   try {
-    category = await client.fetch<CategoryRef | null>(categoryBySlugQuery, { slug: params.category });
+    category = await client.fetch<CategoryRef | null>(categoryBySlugQuery, { slug: categorySlug });
   } catch {
     category = null;
   }
   if (!category) notFound();
 
-  const page = Math.max(1, parseInt(searchParams.page ?? "1", 10) || 1);
+  const page = Math.max(1, parseInt(pageParam ?? "1", 10) || 1);
   const start = (page - 1) * PAGE_SIZE;
   const end = start + PAGE_SIZE;
 
@@ -77,11 +83,11 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   try {
     [articles, total] = await Promise.all([
       client.fetch<ArticleCardData[]>(articlesByCategorySlugQuery, {
-        categorySlug: params.category,
+        categorySlug,
         start,
         end,
       }),
-      client.fetch<number>(categoryArticleCountQuery, { categorySlug: params.category }),
+      client.fetch<number>(categoryArticleCountQuery, { categorySlug }),
     ]);
   } catch {
     articles = [];
@@ -112,7 +118,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         <nav className="mt-12 flex justify-center gap-2 text-sm" aria-label="Pagination">
           {page > 1 ? (
             <Link
-              href={`/blog/category/${params.category}?page=${page - 1}`}
+              href={`/blog/category/${categorySlug}?page=${page - 1}`}
               className="rounded-full border border-border px-4 py-2 hover:bg-muted"
               rel="prev"
             >
@@ -124,7 +130,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
           </span>
           {page < totalPages ? (
             <Link
-              href={`/blog/category/${params.category}?page=${page + 1}`}
+              href={`/blog/category/${categorySlug}?page=${page + 1}`}
               className="rounded-full border border-border px-4 py-2 hover:bg-muted"
               rel="next"
             >

@@ -13,7 +13,7 @@ import type { ArticleCard as ArticleCardData, AuthorFull } from "@/types/sanity"
 
 export const revalidate = 120;
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
   try {
@@ -26,14 +26,15 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
   try {
     const client = getClient();
-    const author = await client.fetch<AuthorFull | null>(authorBySlugQuery, { slug: params.slug });
+    const author = await client.fetch<AuthorFull | null>(authorBySlugQuery, { slug });
     if (!author) {
       return createMetadata({
         title: "Author",
         description: "Author profile.",
-        path: `/authors/${params.slug}`,
+        path: `/authors/${slug}`,
         noIndex: true,
       });
     }
@@ -47,20 +48,21 @@ export async function generateMetadata({ params }: Props) {
     return createMetadata({
       title: "Author",
       description: "Author profile.",
-      path: `/authors/${params.slug}`,
+      path: `/authors/${slug}`,
       noIndex: true,
     });
   }
 }
 
 export default async function AuthorPage({ params }: Props) {
+  const { slug } = await params;
   const client = getClient();
   let author: AuthorFull | null = null;
   let articles: ArticleCardData[] = [];
   try {
-    author = await client.fetch<AuthorFull | null>(authorBySlugQuery, { slug: params.slug });
+    author = await client.fetch<AuthorFull | null>(authorBySlugQuery, { slug });
     if (author) {
-      articles = await client.fetch<ArticleCardData[]>(articlesByAuthorSlugQuery, { authorSlug: params.slug });
+      articles = await client.fetch<ArticleCardData[]>(articlesByAuthorSlugQuery, { authorSlug: slug });
     }
   } catch {
     author = null;
