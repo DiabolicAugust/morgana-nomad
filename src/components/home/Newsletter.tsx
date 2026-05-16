@@ -1,17 +1,17 @@
 export function Newsletter() {
   return (
     <section
-      className="mt-16 rounded-2xl border border-border bg-card px-6 py-10 sm:px-10"
+      className="rounded-lg border border-border bg-card px-6 py-12 shadow-soft sm:px-12 sm:py-14"
       aria-labelledby="newsletter-heading"
     >
       <div className="mx-auto max-w-xl text-center">
-        <h2 id="newsletter-heading" className="text-2xl font-bold tracking-tight">
+        <h2 id="newsletter-heading" className="font-display text-headline-lg tracking-tight text-primary">
           Stay in the loop
         </h2>
-        <p className="mt-3 text-muted-foreground text-sm">
+        <p className="mt-4 text-muted-foreground sm:text-[17px] sm:leading-relaxed">
           Occasionally we announce new guides and major updates worth your attention. Subscribe when signup is enabled.
         </p>
-        <form className="mt-6 flex flex-col sm:flex-row gap-3" action="#" method="post">
+        <form className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-center sm:gap-10" action="#" method="post">
           <label htmlFor="newsletter-email" className="sr-only">
             Email address
           </label>
@@ -21,11 +21,11 @@ export function Newsletter() {
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
-            className="h-11 flex-1 rounded-full border border-border bg-background px-4 text-sm outline-none ring-ring focus-visible:ring-2"
+            className="h-12 min-w-[min(100%,260px)] flex-1 rounded-none border-0 border-b border-border bg-transparent pb-3 text-[15px] outline-none ring-0 placeholder:text-muted-foreground/70 focus-visible:border-primary"
           />
           <button
             type="button"
-            className="h-11 shrink-0 rounded-full bg-accent px-6 text-sm font-medium text-accent-foreground opacity-80 cursor-not-allowed"
+            className="h-12 shrink-0 rounded-lg bg-primary px-10 text-sm font-semibold text-primary-foreground opacity-70 shadow-soft transition hover:-translate-y-0.5 hover:opacity-95 hover:shadow-elevated disabled:cursor-not-allowed disabled:hover:translate-y-0"
             disabled
             title="Signup is not enabled yet."
           >

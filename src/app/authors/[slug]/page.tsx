@@ -96,7 +96,7 @@ export default async function AuthorPage({ params }: Props) {
           </div>
         ) : null}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">{author.name}</h1>
+          <h1 className="font-display text-headline-lg tracking-tight text-primary md:text-4xl">{author.name}</h1>
           {author.role ? <p className="mt-2 text-accent font-medium">{author.role}</p> : null}
           {author.bio ? <p className="mt-4 text-muted-foreground whitespace-pre-wrap max-w-2xl">{author.bio}</p> : null}
           {author.credentials?.length ? (

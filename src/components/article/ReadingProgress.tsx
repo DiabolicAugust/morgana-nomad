@@ -25,7 +25,7 @@ export function ReadingProgress() {
     >
       <div
         id="reading-progress-bar"
-        className="h-full w-0 bg-accent transition-[width] duration-150 ease-out"
+        className="h-full w-0 bg-primary transition-[width] duration-150 ease-out"
       />
     </div>
   );

@@ -8,6 +8,8 @@ import {
   allCategorySlugsQuery,
 } from "@/sanity/lib/queries";
 
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, "");
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -21,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const client = getClient();
     const [articles, categories, authors] = await Promise.all([
-      client.fetch<{ slug: string }[]>(allArticleSlugsQuery),
+      client.fetch<{ slug: string; _updatedAt?: string }[]>(allArticleSlugsQuery),
       client.fetch<{ slug: string }[]>(allCategorySlugsQuery),
       client.fetch<{ slug: string }[]>(allAuthorSlugsQuery),
     ]);
@@ -29,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const articleUrls: MetadataRoute.Sitemap =
       articles?.map((a) => ({
         url: `${base}/blog/${a.slug}`,
-        lastModified: new Date(),
+        lastModified: a._updatedAt ? new Date(a._updatedAt) : new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.8,
       })) ?? [];

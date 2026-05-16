@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <div className="mx-auto max-w-lg py-20 text-center">
       <p className="text-sm font-semibold text-accent">404</p>
-      <h1 className="mt-2 text-3xl font-bold tracking-tight">Page not found</h1>
+      <h1 className="font-display mt-2 text-headline-lg tracking-tight text-primary">Page not found</h1>
       <p className="mt-4 text-muted-foreground">
         The link may be broken or the page was removed. Try the homepage or blog index.
       </p>

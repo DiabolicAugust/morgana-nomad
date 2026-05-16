@@ -6,13 +6,13 @@ import Link from "next/link";
 export function FeaturedArticles({ articles }: { articles: ArticleCardType[] }) {
   if (!articles.length) {
     return (
-      <section className="mt-16" aria-labelledby="featured-heading">
-        <div className="flex items-end justify-between gap-4 mb-8">
-          <h2 id="featured-heading" className="text-2xl font-bold tracking-tight">
+      <section aria-labelledby="featured-heading">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+          <h2 id="featured-heading" className="font-display text-headline-lg tracking-tight text-primary">
             Latest articles
           </h2>
         </div>
-        <p className="text-muted-foreground rounded-xl border border-dashed border-border p-8 text-center">
+        <p className="rounded-lg border border-dashed border-border bg-muted/30 p-12 text-center text-muted-foreground">
           We&apos;re preparing new guides. Check back soon.
         </p>
       </section>
@@ -22,19 +22,22 @@ export function FeaturedArticles({ articles }: { articles: ArticleCardType[] }) 
   const [first, ...rest] = articles;
 
   return (
-    <section className="mt-16" aria-labelledby="featured-heading">
-      <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-        <h2 id="featured-heading" className="text-2xl font-bold tracking-tight">
+    <section aria-labelledby="featured-heading">
+      <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <h2 id="featured-heading" className="font-display text-headline-lg tracking-tight text-primary">
           Latest articles
         </h2>
-        <Link href="/blog" className="text-sm font-medium text-accent hover:underline">
+        <Link
+          href="/blog"
+          className="text-sm font-semibold uppercase tracking-wider text-accent underline-offset-4 hover:underline"
+        >
           View all
         </Link>
       </div>
-      <div className="space-y-8">
+      <div className="space-y-10 md:space-y-12">
         <ArticleCard article={first} variant="featured" />
         {rest.length ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {rest.map((a) => (
               <ArticleCard key={a._id} article={a} />
             ))}

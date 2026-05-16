@@ -6,31 +6,31 @@ import { siteConfig } from "@/config/site";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-border mt-20 bg-muted/30">
-      <div className="mx-auto max-w-6xl px-4 py-12 grid gap-10 sm:grid-cols-2 text-sm">
+    <footer className="mt-section border-t border-border bg-muted/40">
+      <div className="mx-auto grid max-w-content gap-12 px-gutter py-14 text-sm sm:grid-cols-2">
         <div>
-          <p className="font-semibold text-foreground">{siteConfig.name}</p>
-          <p className="mt-2 text-muted-foreground max-w-xs">{siteConfig.description}</p>
+          <p className="font-display text-xl font-semibold text-primary">{siteConfig.name}</p>
+          <p className="mt-3 max-w-sm leading-relaxed text-muted-foreground">{siteConfig.description}</p>
         </div>
         <div>
-          <p className="font-semibold text-foreground mb-3">Explore</p>
-          <ul className="space-y-2 text-muted-foreground">
+          <p className="text-editorial-label mb-5 text-muted-foreground">Explore</p>
+          <ul className="space-y-3 text-muted-foreground">
             {mainNav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="hover:text-accent">
+                <Link href={item.href} className="transition hover:text-primary hover:underline underline-offset-4">
                   {item.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/privacy" className="hover:text-accent">
+              <Link href="/privacy" className="transition hover:text-primary hover:underline underline-offset-4">
                 Privacy
               </Link>
             </li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
+      <div className="border-t border-border py-6 text-center text-editorial-label text-muted-foreground">
         © {year} {siteConfig.name}. All rights reserved.
       </div>
     </footer>

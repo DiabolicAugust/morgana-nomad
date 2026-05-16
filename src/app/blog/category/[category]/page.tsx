@@ -107,7 +107,9 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         ]}
         siteUrl={siteUrl}
       />
-      <h1 className="text-3xl font-bold tracking-tight">{category.title}</h1>
+      <h1 className="font-display text-headline-lg tracking-tight text-primary md:text-[2.65rem]">
+        {category.title}
+      </h1>
       {category.description ? <p className="mt-3 text-muted-foreground max-w-2xl">{category.description}</p> : null}
       <div className="mt-10 grid gap-8 md:grid-cols-2">
         {articles?.map((a) => (

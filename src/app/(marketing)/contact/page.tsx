@@ -9,7 +9,7 @@ export const metadata = createMetadata({
 export default function ContactPage() {
   return (
     <article className="max-w-3xl">
-      <h1 className="text-3xl font-bold tracking-tight">Contact</h1>
+      <h1 className="font-display text-headline-lg tracking-tight text-primary">Contact</h1>
       <p className="mt-6 text-muted-foreground">
         Corrections to published guides, media enquiries, and partnership ideas are welcome. Include the relevant
         article URL and supporting sources wherever possible—we review factual updates and revise content when verified.

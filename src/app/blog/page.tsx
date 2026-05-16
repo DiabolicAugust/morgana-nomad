@@ -45,8 +45,10 @@ export default async function BlogIndexPage({
 
   return (
     <div>
-      <h1 className="text-3xl font-bold tracking-tight">Blog</h1>
-      <p className="mt-3 text-muted-foreground max-w-2xl">
+      <h1 className="font-display text-headline-lg tracking-tight text-primary md:text-[2.65rem]">
+        Blog
+      </h1>
+      <p className="mt-3 text-muted-foreground max-w-2xl leading-relaxed">
         Deep dives on Polish cities, immigration rules, monthly budgets, and how to build a comfortable remote-work
         rhythm here.
       </p>

@@ -15,14 +15,14 @@ export async function GET(request: Request) {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 56,
-          background: "#0b1220",
-          color: "#f8fafc",
+          background: "linear-gradient(160deg, #faf9f7 0%, #f0ece6 45%, #e2efe4 100%)",
+          color: "#172c21",
           fontFamily: "system-ui, sans-serif",
         }}
       >
-        <div style={{ fontSize: 52, fontWeight: 700, lineHeight: 1.1, letterSpacing: -1 }}>{title}</div>
-        <div style={{ fontSize: 24, opacity: 0.85, lineHeight: 1.4 }}>{description}</div>
-        <div style={{ fontSize: 18, opacity: 0.6 }}>polandnomad.com</div>
+        <div style={{ fontSize: 48, fontWeight: 700, lineHeight: 1.1, letterSpacing: -1 }}>{title}</div>
+        <div style={{ fontSize: 22, lineHeight: 1.45, color: "#424844" }}>{description}</div>
+        <div style={{ fontSize: 16, color: "#737873" }}>polandnomad.com</div>
       </div>
     ),
     { width: 1200, height: 630 },

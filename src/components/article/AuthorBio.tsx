@@ -7,7 +7,7 @@ import type { AuthorFull } from "@/types/sanity";
 export function AuthorBio({ author }: { author: AuthorFull }) {
   const photo = urlForImage(author.photo)?.width(160).height(160).url();
   return (
-    <aside className="mt-12 rounded-xl border border-border p-6 bg-card">
+    <aside className="mt-12 rounded-lg border border-border bg-card p-8 shadow-soft">
       <div className="flex flex-col sm:flex-row gap-6">
         {photo ? (
           <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border border-border">

@@ -34,10 +34,12 @@ export default async function HomePage() {
     <>
       <JsonLd data={organizationJsonLd(siteUrl)} />
       <JsonLd data={websiteJsonLd(siteUrl)} />
-      <Hero />
-      <FeaturedArticles articles={articles} />
-      <Categories categories={categories} />
-      <Newsletter />
+      <div className="flex flex-col gap-section">
+        <Hero />
+        <FeaturedArticles articles={articles} />
+        <Categories categories={categories} />
+        <Newsletter />
+      </div>
     </>
   );
 }

@@ -6,7 +6,7 @@ import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 import { FAQSchema } from "@/components/seo/FAQSchema";
 import { siteConfig } from "@/config/site";
 import { articleOgImageUrl, createMetadata } from "@/lib/metadata";
-import { truncate } from "@/lib/seo";
+import { canonicalArticlePath, truncate } from "@/lib/seo";
 import { urlForImage } from "@/sanity/lib/image";
 import { getClient } from "@/sanity/lib/client";
 import { allArticleSlugsQuery, articleBySlugQuery } from "@/sanity/lib/queries";
@@ -45,11 +45,23 @@ export async function generateMetadata({ params }: Props) {
     const title = article.seoTitle ?? article.title;
     const description = truncate(article.seoDescription ?? article.excerpt, 160);
     const og = articleOgImageUrl(article.title, (article.seoDescription ?? article.excerpt).slice(0, 140));
+    const path = canonicalArticlePath(article.canonicalPath, article.slug);
+    const tagList = [
+      ...(article.tags ?? []),
+      ...(article.keywords ?? []).filter((k): k is string => typeof k === "string"),
+    ];
     return createMetadata({
       title,
       description,
-      path: article.canonicalPath ?? `/blog/${article.slug}`,
+      path,
       ogImage: og,
+      articleOg: {
+        publishedAt: article.publishedAt,
+        updatedAt: article.updatedAt,
+        section: article.categories?.[0]?.title,
+        tags: tagList.length ? Array.from(new Set(tagList)).slice(0, 16) : undefined,
+        authorNames: article.author?.name ? [article.author.name] : undefined,
+      },
     });
   } catch (err) {
     if (process.env.NODE_ENV === "development") {
@@ -80,11 +92,12 @@ export default async function ArticlePage({ params }: Props) {
 
   const siteUrl = siteConfig.url;
   const heroImageUrl = urlForImage(article.featuredImage)?.width(1200).height(630).url();
+  const articlePath = canonicalArticlePath(article.canonicalPath, article.slug);
 
   const breadcrumbs = [
     { name: "Home", path: "/" },
     { name: "Blog", path: "/blog" },
-    { name: article.title, path: `/blog/${article.slug}` },
+    { name: article.title, path: articlePath },
   ];
 
   return (
@@ -97,7 +110,7 @@ export default async function ArticlePage({ params }: Props) {
         breadcrumbItems={[
           { label: "Home", href: "/" },
           { label: "Blog", href: "/blog" },
-          { label: article.title, href: `/blog/${article.slug}` },
+          { label: article.title, href: articlePath },
         ]}
       />
     </article>

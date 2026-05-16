@@ -1,11 +1,12 @@
 import type { ArticleFull } from "@/types/sanity";
 
-import { absoluteUrl } from "./seo";
+import { siteConfig } from "@/config/site";
+
+import { absoluteUrl, canonicalArticlePath } from "./seo";
 
 export function articleJsonLd(article: ArticleFull, siteUrl: string, heroImageUrl?: string) {
-  const url = article.canonicalPath
-    ? absoluteUrl(article.canonicalPath, siteUrl)
-    : absoluteUrl(`/blog/${article.slug}`, siteUrl);
+  const path = canonicalArticlePath(article.canonicalPath, article.slug);
+  const url = absoluteUrl(path, siteUrl);
 
   const imageUrl =
     heroImageUrl ??
@@ -37,8 +38,12 @@ export function articleJsonLd(article: ArticleFull, siteUrl: string, heroImageUr
       : undefined,
     publisher: {
       "@type": "Organization",
-      name: "Poland Nomad",
+      name: siteConfig.name,
       url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/opengraph-image", siteUrl),
+      },
     },
   };
 }
@@ -72,10 +77,14 @@ export function organizationJsonLd(siteUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Poland Nomad",
+    name: siteConfig.name,
     url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/opengraph-image", siteUrl),
+    },
     description:
-      "Practical guides for remote workers and digital nomads living in Poland — visas, cities, and cost of living.",
+      siteConfig.description,
   };
 }
 
@@ -83,7 +92,7 @@ export function websiteJsonLd(siteUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Poland Nomad",
+    name: siteConfig.name,
     url: siteUrl,
   };
 }

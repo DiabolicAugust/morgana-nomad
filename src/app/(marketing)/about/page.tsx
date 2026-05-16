@@ -10,7 +10,7 @@ export const metadata = createMetadata({
 export default function AboutPage() {
   return (
     <article className="max-w-3xl">
-      <h1 className="text-3xl font-bold tracking-tight">About Poland Nomad</h1>
+      <h1 className="font-display text-headline-lg tracking-tight text-primary">About Poland Nomad</h1>
       <div className="mt-8 prose-custom">
         <p>
           Poland Nomad publishes independent, practical guides for remote workers comparing Poland’s cities,

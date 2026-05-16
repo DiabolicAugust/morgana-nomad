@@ -4,23 +4,27 @@ import { siteConfig } from "@/config/site";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-muted/80 to-background px-6 py-16 sm:px-12 sm:py-20">
-      <div className="mx-auto max-w-3xl text-center">
-        <p className="text-sm font-medium uppercase tracking-widest text-accent">Digital nomads · Poland</p>
-        <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl text-balance">{siteConfig.tagline}</h1>
-        <p className="mt-6 text-lg text-muted-foreground text-balance">{siteConfig.description}</p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+    <section className="relative overflow-hidden rounded-lg border border-border/80 bg-gradient-to-br from-card via-muted/40 to-muted shadow-soft">
+      <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:px-10 sm:py-24 lg:py-28">
+        <p className="text-editorial-label text-accent">Digital nomads · Poland</p>
+        <h1 className="font-display mt-5 text-balance text-display-xl text-primary sm:text-5xl md:text-display-2xl">
+          {siteConfig.tagline}
+        </h1>
+        <p className="mt-8 text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
+          {siteConfig.description}
+        </p>
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/blog"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-accent px-6 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity"
+            className="inline-flex h-12 min-h-[2.75rem] items-center justify-center rounded-lg bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-soft transition hover:-translate-y-0.5 hover:shadow-elevated"
           >
             Read the guides
           </Link>
           <Link
             href="/about"
-            className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-sm font-medium hover:bg-muted transition-colors"
+            className="inline-flex h-12 items-center justify-center rounded-full border border-border bg-card/80 px-8 text-sm font-medium text-foreground backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-soft"
           >
-            About the project
+            About us
           </Link>
         </div>
       </div>

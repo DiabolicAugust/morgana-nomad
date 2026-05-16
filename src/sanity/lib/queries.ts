@@ -54,8 +54,9 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
 }`;
 
 export const allArticleSlugsQuery = `
-  *[_type == "article" && defined(slug.current)]{
-    "slug": slug.current
+  *[_type == "article" && defined(slug.current) && defined(publishedAt)]{
+    "slug": slug.current,
+    "_updatedAt": _updatedAt
   }
 `;
 

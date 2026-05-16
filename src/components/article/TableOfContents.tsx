@@ -9,7 +9,7 @@ export function TableOfContents({
 }) {
   if (!headings.length) return null;
   return (
-    <nav aria-label="Table of contents" className="rounded-xl border border-border p-4 bg-card">
+    <nav aria-label="Table of contents" className="rounded-lg border border-border bg-card p-5 shadow-soft">
       <p className="text-sm font-semibold mb-3">On this page</p>
       <ol className="space-y-2 text-sm">
         {headings.map((h) => (
