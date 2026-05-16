@@ -2,46 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modern Heritage — DESIGN.md (soft parchment, forest primary, muted red accents) */
+/**
+ * Modern Heritage palette (DESIGN.md).
+ *
+ * Every variable maps 1:1 to a hex value in the DESIGN.md YAML token table
+ * (sand-toned surfaces, ink-green primary, sun-baked cedar secondary).
+ */
 :root {
-  --background: 40 24% 97%;
-  --foreground: 174 14% 11%;
-  --card: 0 0% 100%;
-  --card-foreground: 174 14% 11%;
-  --muted: 40 18% 94%;
-  --muted-foreground: 168 8% 32%;
-  --border: 80 11% 78%;
-  --input: 80 11% 78%;
-  --primary: 157 34% 13%;
-  --primary-foreground: 0 0% 100%;
-  --accent: 359 44% 44%;
-  --accent-foreground: 0 0% 100%;
-  --chip: 21 90% 94%;
-  --chip-foreground: 20 55% 20%;
-  --ring: 157 34% 35%;
+  /* Surfaces — page sits on warm sand, raised cards carry a soft sage tint */
+  --background: 36 42% 85%; /* #e9dcc9  DESIGN.md narrative "rich, warm sand" */
+  --card: 130 20% 75%; /* #b4cdb8  primary-fixed-dim — saturated sage green above the sand */
+  --muted: 43 90% 92%; /* #fdf3da  surface-container-low */
+  --surface-low: 43 90% 92%; /* #fdf3da  surface-container-low */
+  --surface-high: 43 69% 90%; /* #f7edd4  surface-container */
+  --surface-highest: 44 55% 88%; /* #f1e8cf  surface-container-high */
+  --surface-dim: 42 38% 82%; /* #e3d9c1  surface-dim */
+
+  /* Foregrounds */
+  --foreground: 45 45% 9%; /* #201b0c  on-surface / on-background */
+  --card-foreground: 45 45% 9%;
+  --muted-foreground: 120 4% 27%; /* #434843  on-surface-variant */
+
+  /* Outlines — DESIGN.md narrative "1px solid border in slightly darker sand shade #DBCAB0" */
+  --border: 36 37% 77%; /* #dbcab0  darker-sand divider */
+  --input: 36 37% 77%;
+  --outline: 120 3% 46%; /* #737973  outline */
+
+  /* Primary — forest green (DESIGN.md narrative "#1B3022"), used for headings & primary buttons */
+  --primary: 140 28% 15%; /* #1b3022  primary / on-primary-container surface */
+  --primary-foreground: 34 100% 97%; /* #fff8ef  creamy sand reads on forest green */
+  --primary-container: 140 28% 15%;
+  --primary-container-foreground: 133 11% 55%; /* #819986  on-primary-container */
+
+  /* Secondary / Accent — sun-baked cedar */
+  --accent: 31 47% 33%; /* #7d562d  secondary */
+  --accent-foreground: 0 0% 100%; /* #ffffff  on-secondary */
+  --accent-container: 29 100% 80%; /* #ffca98  secondary-container */
+  --accent-container-foreground: 31 49% 32%; /* #7a532a  on-secondary-container */
+
+  /* Tertiary — deep amber-brown */
+  --tertiary: 39 100% 6%; /* #201500  tertiary */
+  --tertiary-foreground: 0 0% 100%; /* #ffffff  on-tertiary */
+  --tertiary-container: 42 72% 13%; /* #372909  tertiary-container */
+  --tertiary-container-foreground: 40 26% 53%; /* #a59067  on-tertiary-container */
+
+  /* Chip — inverse-primary tint with forest-green text */
+  --chip: 130 20% 75%; /* #b4cdb8  inverse-primary */
+  --chip-foreground: 140 28% 15%; /* #1b3022  primary-container */
+
+  /* Focus ring — primary-container reads well on the sand base */
+  --ring: 140 28% 15%;
+
+  /* Status */
+  --destructive: 0 75% 42%; /* #ba1a1a  error */
+  --destructive-foreground: 0 0% 100%; /* #ffffff  on-error */
 }
 
 .dark {
-  --background: 174 12% 8%;
-  --foreground: 40 26% 95%;
-  --card: 174 14% 10%;
-  --card-foreground: 40 26% 95%;
-  --muted: 174 14% 16%;
-  --muted-foreground: 40 12% 70%;
-  --border: 174 14% 18%;
-  --input: 174 14% 18%;
-  --primary: 138 26% 55%;
-  --primary-foreground: 174 12% 8%;
-  --accent: 7 72% 60%;
-  --accent-foreground: 0 0% 100%;
-  --chip: 20 40% 16%;
-  --chip-foreground: 21 80% 88%;
-  --ring: 138 26% 45%;
+  /* Inverse-surface drives the dark backdrop */
+  --background: 46 26% 16%; /* #35301f  inverse-surface */
+  --foreground: 43 78% 91%; /* #faf0d7  inverse-on-surface */
+  --card: 45 45% 9%; /* #201b0c  on-surface as deep card */
+  --card-foreground: 43 78% 91%;
+  --muted: 45 45% 9%;
+  --muted-foreground: 43 48% 86%; /* #ece2c9  surface-container-highest */
+  --surface-low: 45 45% 9%;
+  --surface-high: 46 26% 16%;
+  --surface-highest: 42 38% 82%;
+  --surface-dim: 45 45% 9%;
+
+  --border: 120 3% 46%; /* #737973  outline */
+  --input: 120 3% 46%;
+  --outline: 103 6% 77%; /* #c3c8c1  outline-variant */
+
+  /* primary flips to inverse-primary so it reads on dark */
+  --primary: 130 20% 75%; /* #b4cdb8  inverse-primary */
+  --primary-foreground: 140 28% 15%; /* #1b3022  primary-container */
+  --primary-container: 140 28% 15%;
+  --primary-container-foreground: 133 11% 55%;
+
+  --accent: 29 100% 80%; /* #ffca98  secondary-container */
+  --accent-foreground: 31 49% 32%; /* #7a532a  on-secondary-container */
+  --accent-container: 31 47% 33%; /* #7d562d  secondary */
+  --accent-container-foreground: 0 0% 100%;
+
+  --tertiary: 40 26% 53%; /* #a59067  on-tertiary-container */
+  --tertiary-foreground: 39 100% 6%;
+  --tertiary-container: 42 72% 13%;
+  --tertiary-container-foreground: 40 26% 53%;
+
+  --chip: 140 28% 15%; /* #1b3022  primary-container */
+  --chip-foreground: 130 20% 75%; /* #b4cdb8  inverse-primary */
+
+  --ring: 130 20% 75%;
+
+  --destructive: 6 100% 92%; /* #ffdad6  error-container */
+  --destructive-foreground: 357 100% 29%; /* #93000a  on-error-container */
 }
 
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
+}
+
+/**
+ * Cards carry a diagonal sage-to-white wash so they read as a soft "lit" surface
+ * lifting off the sand. Tailwind's .bg-card still sets the base background-color
+ * (used as fallback / when the gradient is overridden); the gradient is layered
+ * on top via background-image.
+ */
+.bg-card {
+  background-image: linear-gradient(
+    135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--surface-low)) 100%
+  );
 }
 
 @layer utilities {
@@ -59,7 +134,7 @@ body {
  * Editorial drop-cap — DESIGN.md literary opening.
  * Scoped to a specific paragraph marked with data-dropcap in JSX so it cannot leak.
  */
-.prose-custom p[data-dropcap="true"]::first-letter {
+.prose-custom p[data-dropcap='true']::first-letter {
   float: left;
   margin-top: 0.15rem;
   margin-right: 0.6rem;
