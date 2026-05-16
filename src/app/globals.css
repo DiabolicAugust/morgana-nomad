@@ -3,120 +3,98 @@
 @tailwind utilities;
 
 /**
- * Modern Heritage palette (DESIGN.md).
+ * Modern Heritage — simplified single-accent palette.
  *
- * Every variable maps 1:1 to a hex value in the DESIGN.md YAML token table
- * (sand-toned surfaces, ink-green primary, sun-baked cedar secondary).
+ * Page (warm sand) → Card (cream, lighter so it lifts) → Inset (sunken sand).
+ * One ink color (forest-green) for body & headings. One accent (sun-baked cedar)
+ * for links, markers, focus rings, small UI.
+ *
+ * Legacy aliases (--primary, --muted, --chip, ...) are derived from the core
+ * tokens so existing Tailwind utilities (bg-muted, text-primary, ...) keep
+ * working without component changes.
  */
 :root {
-  /* Surfaces — page sits on warm sand, raised cards carry a soft sage tint */
-  --background: 36 42% 85%; /* #e9dcc9  DESIGN.md narrative "rich, warm sand" */
-  --card: 130 20% 75%; /* #b4cdb8  primary-fixed-dim — saturated sage green above the sand */
-  --muted: 43 90% 92%; /* #fdf3da  surface-container-low */
-  --surface-low: 43 90% 92%; /* #fdf3da  surface-container-low */
-  --surface-high: 43 69% 90%; /* #f7edd4  surface-container */
-  --surface-highest: 44 55% 88%; /* #f1e8cf  surface-container-high */
-  --surface-dim: 42 38% 82%; /* #e3d9c1  surface-dim */
+  /* ---- Surfaces (page → card → inset) ---- */
+  --background: 36 42% 88%; /* #ecdfcc  warm sand, slightly lighter than before */
+  --card: 43 75% 95%; /* #fbf3df  cream — LIGHTER than page, so cards lift */
+  --inset: 36 30% 82%; /* #e0d3bb  sunk surface for code blocks, quotes */
 
-  /* Foregrounds */
-  --foreground: 45 45% 9%; /* #201b0c  on-surface / on-background */
-  --card-foreground: 45 45% 9%;
-  --muted-foreground: 120 4% 27%; /* #434843  on-surface-variant */
+  /* ---- Ink (text on surfaces) ---- */
+  --foreground: 140 30% 12%; /* #16291c  forest-ink — body & headings */
+  --foreground-muted: 36 15% 38%; /* #6b6253  warm grey for meta, captions */
 
-  /* Outlines — DESIGN.md narrative "1px solid border in slightly darker sand shade #DBCAB0" */
-  --border: 36 37% 77%; /* #dbcab0  darker-sand divider */
-  --input: 36 37% 77%;
-  --outline: 120 3% 46%; /* #737973  outline */
+  /* ---- Accent (the ONE color that does work) ---- */
+  --accent: 31 47% 33%; /* #7d562d  sun-baked cedar — links, markers, small UI */
 
-  /* Primary — forest green (DESIGN.md narrative "#1B3022"), used for headings & primary buttons */
-  --primary: 140 28% 15%; /* #1b3022  primary / on-primary-container surface */
-  --primary-foreground: 34 100% 97%; /* #fff8ef  creamy sand reads on forest green */
-  --primary-container: 140 28% 15%;
-  --primary-container-foreground: 133 11% 55%; /* #819986  on-primary-container */
+  /* ---- Lines ---- */
+  --border: 36 30% 75%; /* #d2c3a6  darker sand divider */
 
-  /* Secondary / Accent — sun-baked cedar */
-  --accent: 31 47% 33%; /* #7d562d  secondary */
-  --accent-foreground: 0 0% 100%; /* #ffffff  on-secondary */
-  --accent-container: 29 100% 80%; /* #ffca98  secondary-container */
-  --accent-container-foreground: 31 49% 32%; /* #7a532a  on-secondary-container */
+  /* ---- Focus / interactive ---- */
+  --ring: 31 47% 33%; /* same as accent, for consistency */
 
-  /* Tertiary — deep amber-brown */
-  --tertiary: 39 100% 6%; /* #201500  tertiary */
-  --tertiary-foreground: 0 0% 100%; /* #ffffff  on-tertiary */
-  --tertiary-container: 42 72% 13%; /* #372909  tertiary-container */
-  --tertiary-container-foreground: 40 26% 53%; /* #a59067  on-tertiary-container */
+  /* ---- Status (keep but only one) ---- */
+  --destructive: 0 65% 38%; /* #a02323  muted brick red */
 
-  /* Chip — inverse-primary tint with forest-green text */
-  --chip: 130 20% 75%; /* #b4cdb8  inverse-primary */
-  --chip-foreground: 140 28% 15%; /* #1b3022  primary-container */
-
-  /* Focus ring — primary-container reads well on the sand base */
-  --ring: 140 28% 15%;
-
-  /* Status */
-  --destructive: 0 75% 42%; /* #ba1a1a  error */
-  --destructive-foreground: 0 0% 100%; /* #ffffff  on-error */
+  /* ---- Legacy aliases so existing Tailwind utilities keep working ---- */
+  --card-foreground: var(--foreground);
+  --muted: var(--inset);
+  --muted-foreground: var(--foreground-muted);
+  --input: var(--border);
+  --outline: var(--border);
+  --primary: var(--foreground); /* headings / primary buttons = forest-ink */
+  --primary-foreground: var(--card); /* cream text on forest primary */
+  --primary-container: var(--foreground);
+  --primary-container-foreground: var(--card);
+  --accent-foreground: var(--card); /* cream text on cedar */
+  --accent-container: var(--accent);
+  --accent-container-foreground: var(--card);
+  --tertiary: var(--accent);
+  --tertiary-foreground: var(--card);
+  --tertiary-container: var(--accent);
+  --tertiary-container-foreground: var(--card);
+  --chip: var(--inset); /* tags = sunken sand with forest text */
+  --chip-foreground: var(--foreground);
+  --destructive-foreground: var(--card);
 }
 
 .dark {
-  /* Inverse-surface drives the dark backdrop */
-  --background: 46 26% 16%; /* #35301f  inverse-surface */
-  --foreground: 43 78% 91%; /* #faf0d7  inverse-on-surface */
-  --card: 45 45% 9%; /* #201b0c  on-surface as deep card */
-  --card-foreground: 43 78% 91%;
-  --muted: 45 45% 9%;
-  --muted-foreground: 43 48% 86%; /* #ece2c9  surface-container-highest */
-  --surface-low: 45 45% 9%;
-  --surface-high: 46 26% 16%;
-  --surface-highest: 42 38% 82%;
-  --surface-dim: 45 45% 9%;
+  --background: 140 18% 10%; /* #15211a  deep forest, not generic dark */
+  --card: 140 15% 14%; /* #1f2922  slightly lifted forest */
+  --inset: 140 20% 8%; /* #101a13  sunk surface */
 
-  --border: 120 3% 46%; /* #737973  outline */
-  --input: 120 3% 46%;
-  --outline: 103 6% 77%; /* #c3c8c1  outline-variant */
+  --foreground: 43 60% 92%; /* #f3ead2  warm cream text */
+  --foreground-muted: 43 20% 65%; /* #b6ac95  dimmed cream */
 
-  /* primary flips to inverse-primary so it reads on dark */
-  --primary: 130 20% 75%; /* #b4cdb8  inverse-primary */
-  --primary-foreground: 140 28% 15%; /* #1b3022  primary-container */
-  --primary-container: 140 28% 15%;
-  --primary-container-foreground: 133 11% 55%;
+  --accent: 29 65% 65%; /* #d99762  cedar lifted for dark contrast */
+  --border: 140 12% 22%; /* #303b34  quiet divider */
+  --ring: 29 65% 65%;
+  --destructive: 0 60% 65%; /* #d76e6e  softened for dark */
 
-  --accent: 29 100% 80%; /* #ffca98  secondary-container */
-  --accent-foreground: 31 49% 32%; /* #7a532a  on-secondary-container */
-  --accent-container: 31 47% 33%; /* #7d562d  secondary */
-  --accent-container-foreground: 0 0% 100%;
-
-  --tertiary: 40 26% 53%; /* #a59067  on-tertiary-container */
-  --tertiary-foreground: 39 100% 6%;
-  --tertiary-container: 42 72% 13%;
-  --tertiary-container-foreground: 40 26% 53%;
-
-  --chip: 140 28% 15%; /* #1b3022  primary-container */
-  --chip-foreground: 130 20% 75%; /* #b4cdb8  inverse-primary */
-
-  --ring: 130 20% 75%;
-
-  --destructive: 6 100% 92%; /* #ffdad6  error-container */
-  --destructive-foreground: 357 100% 29%; /* #93000a  on-error-container */
+  /* Legacy aliases re-resolved against dark-mode tokens */
+  --card-foreground: var(--foreground);
+  --muted: var(--inset);
+  --muted-foreground: var(--foreground-muted);
+  --input: var(--border);
+  --outline: var(--border);
+  --primary: var(--foreground);
+  --primary-foreground: var(--card);
+  --primary-container: var(--foreground);
+  --primary-container-foreground: var(--card);
+  --accent-foreground: var(--card);
+  --accent-container: var(--accent);
+  --accent-container-foreground: var(--card);
+  --tertiary: var(--accent);
+  --tertiary-foreground: var(--card);
+  --tertiary-container: var(--accent);
+  --tertiary-container-foreground: var(--card);
+  --chip: var(--inset);
+  --chip-foreground: var(--foreground);
+  --destructive-foreground: var(--card);
 }
 
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
-}
-
-/**
- * Cards carry a diagonal sage-to-white wash so they read as a soft "lit" surface
- * lifting off the sand. Tailwind's .bg-card still sets the base background-color
- * (used as fallback / when the gradient is overridden); the gradient is layered
- * on top via background-image.
- */
-.bg-card {
-  background-image: linear-gradient(
-    135deg,
-    hsl(var(--card)) 0%,
-    hsl(var(--surface-low)) 100%
-  );
 }
 
 @layer utilities {
